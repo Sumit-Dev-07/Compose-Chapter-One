@@ -1,52 +1,62 @@
 package com.app.chapter_one.ui.features.auth.screen
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.chapter_one.R
 import com.app.chapter_one.ui.theme.OnestSemiBold
 import com.app.chapter_one.ui.theme.Purple40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navigateToSignUp: () -> Unit,navigateToOtpScreen: (String) -> Unit) {
-
-    var mobileNumber by remember { mutableStateOf("") }
-
+fun OtpScreen(navigateBack : () -> Unit,mobileNumber : String) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        "Login",
+                        "Otp",
                         style = TextStyle(
                             color = Color.White,
                             fontFamily = OnestSemiBold,
                             fontSize = 18.sp
                         ),
                     )
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            navigateBack()
+                        },
+                        colors = IconButtonColors(
+                            containerColor = Color.Transparent,
+                            contentColor = Color.White,
+                            disabledContentColor = Color.White,
+                            disabledContainerColor = Color.White
+                        )
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.outline_arrow_back_24),
+                            contentDescription = "Back",
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Purple40
@@ -61,24 +71,7 @@ fun LoginScreen(navigateToSignUp: () -> Unit,navigateToOtpScreen: (String) -> Un
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BasicTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .border(
-                        width = 1.dp,
-                        color = Color.Gray,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(12.dp),
-                value = mobileNumber,
-                onValueChange = { mobileNumber = it },
-            ) { innerTextField ->
-                innerTextField()
-            }
-            Button(onClick = { navigateToOtpScreen(mobileNumber) }) {
-                Text("Navigate")
-            }
+            Text(mobileNumber)
         }
     }
 }
