@@ -16,21 +16,33 @@ fun AppNavHost() {
         navController = navController,
         startDestination = AppScreen.Launcher.route
     ) {
-        composable(AppScreen.Launcher.route) {
+        composable(
+            AppScreen.Launcher.route,
+        ) {
             LauncherScreen(onNavigateToMain = {
                 navController.navigate(AppScreen.Login.route) {
                     popUpTo(AppScreen.Launcher.route) { inclusive = true }
                 }
             })
         }
-        composable(AppScreen.Login.route) {
+        composable(
+            AppScreen.Login.route,
+            exitTransition = NavAnimations.exit(),
+            popEnterTransition = NavAnimations.popEnter(),
+            popExitTransition = NavAnimations.popExit(),
+        ) {
             LoginScreen(navigateToSignUp = {
                 navController.navigate(AppScreen.SignUp.route)
             })
         }
-        composable(AppScreen.SignUp.route) {
+        composable(
+            AppScreen.SignUp.route,
+            enterTransition = NavAnimations.enter(),
+            exitTransition = NavAnimations.fadeOutOnly(),
+            popExitTransition = NavAnimations.popExit()
+        ) {
             SignUpScreen(navigateBack = {
-                navController.popBackStack()
+                navController.navigateUp()
             })
         }
     }
