@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -16,19 +17,25 @@ import androidx.compose.ui.unit.dp
 import com.app.chapter_one.R
 import com.app.chapter_one.ui.theme.ChapterOneTheme
 import com.app.chapter_one.ui.theme.Typography
+import kotlinx.coroutines.delay
 
 @Composable
-fun LauncherScreen(modifier: Modifier = Modifier) {
+fun LauncherScreen(onNavigateToMain: () -> Unit) {
+
+    LaunchedEffect(Unit) {
+        delay(2000)
+        onNavigateToMain()
+    }
+
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = painterResource(R.drawable.app_logo),
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(100.dp),
+            modifier = Modifier.size(100.dp),
             contentDescription = "Logo",
         )
         Text(
@@ -40,8 +47,8 @@ fun LauncherScreen(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun LauncherPreview() {
     ChapterOneTheme {
-        LauncherScreen()
+        LauncherScreen(onNavigateToMain = {})
     }
 }

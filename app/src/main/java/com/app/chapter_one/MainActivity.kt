@@ -7,8 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.app.chapter_one.ui.features.common.screen.LauncherScreen
+import com.app.chapter_one.nav.AppNavHost
 import com.app.chapter_one.ui.theme.ChapterOneTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +19,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChapterOneTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LauncherScreen(modifier = Modifier.padding(innerPadding))
+                    Surface(modifier = Modifier.padding(innerPadding)) {
+                        AppNavHost()
+                    }
                 }
             }
         }
