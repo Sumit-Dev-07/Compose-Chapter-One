@@ -1,0 +1,27 @@
+package com.app.chapter_one
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import com.app.chapter_one.ui.features.common.screen.SplashScreen
+import com.app.chapter_one.ui.theme.ChapterOneTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            ChapterOneTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    SplashScreen(modifier = Modifier.padding(innerPadding))
+                }
+            }
+        }
+    }
+}
+
