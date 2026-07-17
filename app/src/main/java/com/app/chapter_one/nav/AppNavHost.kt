@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.app.chapter_one.ui.features.auth.screen.LoginScreen
 import com.app.chapter_one.ui.features.auth.screen.OtpScreen
 import com.app.chapter_one.ui.features.auth.screen.SignUpScreen
@@ -14,55 +15,66 @@ import com.app.chapter_one.ui.features.common.screen.LauncherScreen
 
 @Composable
 fun AppNavHost() {
-    val navController: NavHostController = rememberNavController()
+
+    val navController = rememberNavController()
+
     NavHost(
         navController = navController,
-        startDestination = AppScreen.Launcher.route
+        startDestination = Launcher
     ) {
-        // Launcher Screen
-        composable(
-            AppScreen.Launcher.route,
-        ) {
-            LauncherScreen(onNavigateToMain = {
-                navController.navigate(AppScreen.Login.route) {
-                    popUpTo(AppScreen.Launcher.route) { inclusive = true }
+
+        composable<Launcher> {
+
+            LauncherScreen(
+                onNavigateToMain = {
+                    navController.navigate(Login) {
+                        popUpTo<Launcher> {
+                            inclusive = true
+                        }
+                    }
                 }
-            })
+            )
         }
 
-        // Login Screen
-        composable(
-            AppScreen.Login.route,
+        composable<Login>(
             exitTransition = NavAnimations.exit(),
             popEnterTransition = NavAnimations.popEnter(),
-            popExitTransition = NavAnimations.popExit(),
+            popExitTransition = NavAnimations.popExit()
         ) {
-            LoginScreen(navigateToSignUp = {
-                navController.navigate(AppScreen.SignUp.route)
-            }, navigateToOtpScreen = { mobile ->
-                navController.navigate(AppScreen.Otp.createRoute(mobile))
-            })
+
+            LoginScreen(
+
+                navigateToSignUp = {
+                    navController.navigate(SignUp)
+                },
+
+                navigateToOtpScreen = { mobile ->
+                    navController.navigate(Otp(mobile))
+                }
+            )
         }
 
-        // SignUp Screen
-        composable(
-            AppScreen.SignUp.route,
+        composable<SignUp>(
             enterTransition = NavAnimations.enter(),
             exitTransition = NavAnimations.fadeOutOnly(),
             popExitTransition = NavAnimations.popExit()
         ) {
-            SignUpScreen(navigateBack = {
-                navController.navigateUp()
-            })
+
+            SignUpScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                }
+            )
         }
 
-        // Otp Screen
-        composable(
-            AppScreen.Otp.route,
-            arguments = listOf(navArgument(NavArgs.ARG_MOBILE_NUMBER) { type = NavType.StringType })
-        ) { backStackEntry ->
-            val mobileNumber = backStackEntry.arguments?.getString(NavArgs.ARG_MOBILE_NUMBER) ?: ""
-            OtpScreen(navigateBack = { navController.navigateUp() }, mobileNumber = mobileNumber)
+        composable<Otp> { backStackEntry ->
+
+            val otp: Otp = backStackEntry.toRoute()
+
+            OtpScreen(
+                navigateBack = { navController.navigateUp() },
+                mobileNumber = otp.mobileNumber
+            )
         }
     }
 }

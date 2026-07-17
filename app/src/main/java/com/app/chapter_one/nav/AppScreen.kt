@@ -1,10 +1,16 @@
 package com.app.chapter_one.nav
+import kotlinx.serialization.Serializable
 
-sealed class AppScreen(val route: String) {
-    object Launcher : AppScreen("launcher")
-    object Login : AppScreen("login")
-    object SignUp : AppScreen("signup")
-    object Otp : AppScreen("otp/{${NavArgs.ARG_MOBILE_NUMBER}") {
-        fun createRoute(mobileNumber: String) = "otp/$mobileNumber"
-    }
-}
+@Serializable
+data object Launcher
+
+@Serializable
+data object Login
+
+@Serializable
+data object SignUp
+
+@Serializable
+data class Otp(
+    val mobileNumber: String
+)
