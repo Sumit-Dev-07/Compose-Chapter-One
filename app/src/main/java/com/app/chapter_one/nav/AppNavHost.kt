@@ -6,12 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.app.chapter_one.ui.features.auth.screen.LoginScreen
+import com.app.chapter_one.ui.features.auth.screen.SignUpScreen
 import com.app.chapter_one.ui.features.common.screen.LauncherScreen
 
 @Composable
-fun AppNavHost(
-    navController: NavHostController = rememberNavController()
-) {
+fun AppNavHost() {
+    val navController: NavHostController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = AppScreen.Launcher.route
@@ -24,7 +24,14 @@ fun AppNavHost(
             })
         }
         composable(AppScreen.Login.route) {
-            LoginScreen()
+            LoginScreen(navigateToSignUp = {
+                navController.navigate(AppScreen.SignUp.route)
+            })
+        }
+        composable(AppScreen.SignUp.route) {
+            SignUpScreen(navigateBack = {
+                navController.popBackStack()
+            })
         }
     }
 }
