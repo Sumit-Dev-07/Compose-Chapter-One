@@ -11,14 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.app.chapter_one.R
 import com.app.chapter_one.ui.theme.ChapterOneTheme
-import com.app.chapter_one.ui.theme.OnestSemiBold
+import com.app.chapter_one.ui.theme.Typography
 
 @Composable
 fun LauncherScreen(modifier: Modifier = Modifier) {
@@ -36,10 +33,7 @@ fun LauncherScreen(modifier: Modifier = Modifier) {
         )
         Text(
             "Compose",
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontFamily = OnestSemiBold
-            )
+            style = Typography.titleLarge
         )
     }
 }
