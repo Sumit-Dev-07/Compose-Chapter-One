@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.chapter_one.R
 import com.app.chapter_one.ui.theme.ChapterOneTheme
+import com.app.chapter_one.ui.theme.OnestSemiBold
 
 @Composable
 fun LauncherScreen(modifier: Modifier = Modifier) {
@@ -37,7 +38,7 @@ fun LauncherScreen(modifier: Modifier = Modifier) {
             "Compose",
             style = TextStyle(
                 fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold
+                fontFamily = OnestSemiBold
             )
         )
     }
