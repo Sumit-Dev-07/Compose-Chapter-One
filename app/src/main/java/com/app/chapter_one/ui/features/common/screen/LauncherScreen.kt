@@ -20,7 +20,7 @@ import com.app.chapter_one.R
 import com.app.chapter_one.ui.theme.ChapterOneTheme
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun LauncherScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,6 +47,6 @@ fun SplashScreen(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ChapterOneTheme {
-        SplashScreen()
+        LauncherScreen()
     }
 }

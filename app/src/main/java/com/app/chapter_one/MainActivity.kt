@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.app.chapter_one.ui.features.common.screen.SplashScreen
+import com.app.chapter_one.ui.features.common.screen.LauncherScreen
 import com.app.chapter_one.ui.theme.ChapterOneTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChapterOneTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SplashScreen(modifier = Modifier.padding(innerPadding))
+                    LauncherScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
